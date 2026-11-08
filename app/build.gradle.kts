@@ -37,6 +37,12 @@ android {
     }
 }
 
+// Room exporta el esquema de cada versión de la base a app/schemas/ (se sube a git).
+// Sirve para revisar los cambios de tablas y para escribir/testear migraciones.
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
+
 dependencies {
     // AndroidX & Core
     implementation(libs.androidx.core.ktx)
@@ -77,6 +83,8 @@ dependencies {
 
     // Tests (ya venían en el template)
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.espresso.core)
